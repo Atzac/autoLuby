@@ -6,12 +6,11 @@ type propTypes = {
   label?: string;
   value?: string;
   placeholder?: string;
-  onChange?: () => void;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: () => void;
 };
 
 const Input: FC<propTypes> = ({
-  name,
   label,
   onChange,
   placeholder,
@@ -21,7 +20,12 @@ const Input: FC<propTypes> = ({
   return (
     <DivInput>
       <label>{label && label}</label>
-      <input type="email" placeholder={placeholder} />
+      <input
+        type="email"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
     </DivInput>
   );
 };

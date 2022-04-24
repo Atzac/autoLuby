@@ -1,11 +1,11 @@
-import TesteProvider from "@store/teste/testeContext";
+import { Provider } from "@store/index";
 import Routers from "@main/Routers";
 
 function App() {
   return (
-    <TesteProvider>
+    <Provider>
       <Routers />
-    </TesteProvider>
+    </Provider>
   );
 }
 

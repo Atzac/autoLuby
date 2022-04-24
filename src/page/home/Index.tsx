@@ -5,18 +5,13 @@ import carImage from "@assets/car_card.png";
 import carImage2 from "@assets/car2.png";
 import employee from "@assets/employee.png";
 
-import { useContext } from "react";
-import { TesteContext } from "@store/teste/testeContext";
-
 function Home() {
-  const { a } = useContext(TesteContext);
- 
   return (
     <>
       <NavBar />
       <Container>
         <Content>
-          <h1> Bem-vindo, {a} </h1>
+          <h1> Bem-vindo, Carlos </h1>
           <p>Menu</p>
 
           <MenuCard
