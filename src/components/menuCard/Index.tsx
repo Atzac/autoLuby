@@ -1,16 +1,24 @@
 import { FC } from "react";
 import { Card } from "./styles";
 
+import { To, useNavigate } from "react-router-dom";
+
 type propTypes = {
   title: String;
   desc: String;
   amount: String;
   imageUrl?: any;
+  path?: To;
 };
 
-const MenuCard: FC<propTypes> = ({ title, desc, amount, imageUrl }) => {
+const MenuCard: FC<propTypes> = ({ title, desc, amount, imageUrl, path }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`${path}`);
+  };
+
   return (
-    <Card>
+    <Card onClick={handleClick}>
       <div>
         <h1>{title}</h1>
         <p>{desc}</p>

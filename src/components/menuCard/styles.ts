@@ -12,6 +12,7 @@ export const Card = styled.form`
   border: 1px solid #e6e6e6;
   background-color: white;
   justify-content: space-between;
+  cursor: pointer;
   > div {
     width: 100%;
     position: relative;

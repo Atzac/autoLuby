@@ -20,6 +20,7 @@ export const Bar = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     @media screen and (max-width: 900px) {
       margin-right: 40px;
     }

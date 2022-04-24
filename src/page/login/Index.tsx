@@ -4,7 +4,14 @@ import logoIcon from "@assets/autoLuby.png";
 import { CarImageBG, LoginContainer, Divider } from "./styles";
 import { Input, Checkbox, LogoInitial, Button } from "@components/index";
 
+import { useNavigate } from "react-router-dom";
+
+
 const Login: FC = () => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate("/home");
+  };
   return (
     <>
       <Divider>
@@ -22,7 +29,7 @@ const Login: FC = () => {
             <p>Esqueceu a senha?</p>
           </section>
 
-          <Button buttonStyle="primary">Entrar</Button>
+          <Button buttonStyle="primary" onClick={handleClick}>Entrar</Button>
           <p>
             Ainda não tem uma conta? <span>Criar conta</span>
           </p>

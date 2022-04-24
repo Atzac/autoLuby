@@ -10,6 +10,7 @@ import { TesteContext } from "@store/teste/testeContext";
 
 function Home() {
   const { a } = useContext(TesteContext);
+ 
   return (
     <>
       <NavBar />
@@ -22,18 +23,21 @@ function Home() {
             title="Veículos reservados e vendidos"
             desc="Veículos reservados e vendidos por você"
             amount="147 veículos"
+            path={"/yourVehicles"}
             imageUrl={carImage}
           />
           <MenuCard
             title="Listagem geral de veículos"
             desc="Listagem de veículos de toda a empresa"
             amount="180 veículos"
+            path={"/allVehicles"}
             imageUrl={carImage2}
           />
           <MenuCard
             title="Funcionários da empresa"
             desc="Listagem de todos os funcionários empresa"
             amount="147 veículos"
+            path={"/employees"}
             imageUrl={employee}
           />
         </Content>
