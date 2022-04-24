@@ -136,14 +136,13 @@ const datas = [
     valor: "R$ 39.000,00",
   },
 ];
-
-const AllVehicles = () => {
+const YourVehicles = () => {
   const [data, setData] = useState<any>(datas);
   return (
     <>
-      <Container title="Todos Veículos">
+      <Container title="Seus Veículos">
         <Table
-          tableTitle="Listagem geral de veículos"
+          tableTitle="Listagem de veículos reservados e vendidos"
           headers={[
             "Marca",
             "Modelo",
@@ -176,6 +175,6 @@ const AllVehicles = () => {
       </Container>
     </>
   );
-};
+}
 
-export default AllVehicles;
+export default YourVehicles;

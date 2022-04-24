@@ -62,6 +62,9 @@ export const TableStyle = styled.div`
         text-align: center;
       }
     }
+    .minWidth {
+      min-width: 170px;
+    }
     td {
       font-size: 16px;
       font-weight: 500;

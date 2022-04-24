@@ -49,6 +49,7 @@ export const ButtonStyles = styled.button`
     min-width: 80px;
     height: 37px;
     color: var(--white);
+    margin-right: 15px;
     border: none;
     color: white;
     >svg{
