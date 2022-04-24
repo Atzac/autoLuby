@@ -1,0 +1,16 @@
+export const theme = {
+  white: "#FFFFFF",
+  inputBackground: "#F9F9F9",
+  inputStroke: "#E6E6E6",
+  gray: "#7C7C7C",
+  lightGray: "#A2A2A2",
+  primaryRed: "#F54A48",
+  lightRed: "#C13C3A",
+  darkGray: "#3C3C3C",
+  bgGray: "#F9F9F9",
+  confirmation: "#34C38F",
+  avaliable: "#FAC12F",
+  soldBg: "#FDDBDA",
+  availableBg: "#34C38F33",
+  reservedBg: "#FAC12F33",
+};
