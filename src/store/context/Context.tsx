@@ -1,30 +1,16 @@
-import React, { createContext, useState, FC, ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
-
-export const AuthContext = createContext<any>(null);
+import { createContext, useState, FC, ReactNode } from "react";
 
 type propTypes = {
   children: ReactNode;
 };
 
+export const AuthContext = createContext<any>(null);
+
 const Provider: FC<propTypes> = (props) => {
-  const [user, setUser] = useState<any>(null);
-  const navigate = useNavigate();
-
-  const login = (email: string, password: string) => {
-    if (email === "a") {
-      setUser({ email, password });
-      navigate("/");
-    }
-  };
-
-  const logOut = () => {
-    setUser(null);
-    navigate("/")
-  };
+  const [userData, setUserData] = useState<any>(null);
 
   return (
-    <AuthContext.Provider value={{ authenticated: !!user, user, login, logOut }}>
+    <AuthContext.Provider value={{ userData, setUserData }}>
       {props.children}
     </AuthContext.Provider>
   );

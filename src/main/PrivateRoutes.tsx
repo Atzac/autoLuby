@@ -1,15 +1,13 @@
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-
-import { AuthContext } from "@store/index";
+import { getSession } from "@helpers/localStorage";
 
 type propsType = {
   children: JSX.Element;
 };
 
 const PrivateRoutes = (props: propsType) => {
-  const { authenticated } = useContext(AuthContext);
-
+  const authenticated = getSession();
+  
   if (!authenticated) {
     return <Navigate to="/login" />;
   }

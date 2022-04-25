@@ -5,12 +5,7 @@ import PrivateRoutes from "./PrivateRoutes";
 const Routers = () => {
   return (
     <Routes>
-      <Route
-        path="/login"
-        element={
-          <Login />
-        }
-      />
+      <Route path="/login" element={<Login />} />
       <Route
         path="/"
         element={
@@ -19,10 +14,30 @@ const Routers = () => {
           </PrivateRoutes>
         }
       />
-
-      <Route path="/allVehicles" element={<AllVehicles />} />
-      <Route path="/yourVehicles" element={<YourVehicles />} />
-      <Route path="/employees" element={<Employees />} />
+      <Route
+        path="/allVehicles"
+        element={
+          <PrivateRoutes>
+            <AllVehicles />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/yourVehicles"
+        element={
+          <PrivateRoutes>
+            <YourVehicles />
+          </PrivateRoutes>
+        }
+      />
+      <Route
+        path="/employees"
+        element={
+          <PrivateRoutes>
+            <Employees />
+          </PrivateRoutes>
+        }
+      />
     </Routes>
   );
 };

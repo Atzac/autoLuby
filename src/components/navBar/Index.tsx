@@ -1,20 +1,19 @@
-import { FC, useContext } from "react";
-import { Bar } from "./styles";
+import { FC } from "react";
+import { Bar, Logo } from "./styles";
 import { Button, InputSearch } from "@components/index";
 import { MdOutlineLogout } from "react-icons/md";
-import Logo from "@assets/autoLuby.png";
+import AutoLubyLogo from "@assets/autoLub.svg";
 
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "@store/index";
+import { logOut } from "@api/loginUser";
 
 const NavBar: FC = () => {
-  const { logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   return (
     <Bar>
-      <div onClick={() => navigate("/")}>
-        <img src={Logo} alt="logo" />
-      </div>
+      <Logo onClick={() => navigate("/")} urlImage={AutoLubyLogo}>
+        {/* <img src={Logo} alt="logo" /> */}
+      </Logo>
 
       <InputSearch />
 

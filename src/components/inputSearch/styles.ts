@@ -27,7 +27,8 @@ export const DivInput = styled.form`
       outline: none;
     }
   }
-  img {
+  svg {
+    color: ${theme.darkGray};
     width: 20px;
     height: auto;
     position: absolute;

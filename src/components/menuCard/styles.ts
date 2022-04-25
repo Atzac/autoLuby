@@ -12,6 +12,11 @@ export const Card = styled.form`
   border: 1px solid #e6e6e6;
   background-color: white;
   justify-content: space-between;
+  transition: all .5s ease-in-out;
+  &:hover {
+    transform: scale(1.02);
+  }
+
   cursor: pointer;
   > div {
     width: 100%;

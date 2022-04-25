@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { DivInput } from "./styles";
-import SearchIcon from "@assets/search.svg";
+import { BiSearch } from "react-icons/bi"
 
 type propTypes = {
   placeholder?: string;
@@ -11,7 +11,7 @@ const InputSearch: FC<propTypes> = ({ placeholder, size }) => {
   return (
     <DivInput size={size}>
       <input type="text" placeholder={placeholder} />
-      <img src={SearchIcon} alt="searchIcon" />
+      <BiSearch />
     </DivInput>
   );
 };

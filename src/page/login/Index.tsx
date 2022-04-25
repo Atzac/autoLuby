@@ -1,20 +1,23 @@
-import { FC, useState, useContext } from "react";
-
-import { AuthContext } from "@store/index";
+import { FC, useState } from "react";
 
 import carImage from "@assets/car.png";
-import logoIcon from "@assets/autoLuby.png";
+import logoIcon from "@assets/autoLub.svg";
 import { CarImageBG, LoginContainer, Divider } from "./styles";
 import { Input, Checkbox, LogoInitial, Button } from "@components/index";
+import { loginUser } from "@api/loginUser";
+
+import { useNavigate } from "react-router-dom";
 
 const Login: FC = () => {
-  const { login } = useContext(AuthContext);
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  
-  const handleSubmit = () => {
-    login(email, password);
+
+  const handleSubmit = async () => {
+    const response = await loginUser(email, password);
+    if (response) {
+      navigate("/");
+    }
   };
 
   return (
@@ -26,15 +29,15 @@ const Login: FC = () => {
             <p>Faça o login para acessar sua conta</p>
           </div>
 
-          <Input 
-            label="Endereço de email" 
+          <Input
+            label="Endereço de email"
             placeholder={"@mail.com"}
             onChange={(e) => setEmail(e.target.value)}
-            value={email} 
+            value={email}
           />
-          <Input 
-            label="Senha" 
-            placeholder={"senha"} 
+          <Input
+            label="Senha"
+            placeholder={"senha"}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
           />
@@ -44,7 +47,9 @@ const Login: FC = () => {
             <p>Esqueceu a senha?</p>
           </section>
 
-          <Button buttonStyle="primary" onClick={handleSubmit}>Entrar</Button>
+          <Button buttonStyle="primary" onClick={handleSubmit}>
+            Entrar
+          </Button>
           <p>
             Ainda não tem uma conta? <span>Criar conta</span>
           </p>

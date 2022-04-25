@@ -7,9 +7,7 @@ type propTypes = {
 
 const LogoInitial: FC<propTypes> = ({ urlImage }) => {
   return (
-    <Logo>
-      <img src={urlImage} alt="logo" />
-    </Logo>
+    <Logo img={urlImage} />
   );
 };
 
