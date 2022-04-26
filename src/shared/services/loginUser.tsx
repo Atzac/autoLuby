@@ -6,11 +6,9 @@ export const loginUser = async (email: string, password: string) => {
   const data = JSON.stringify({ email, password });
   try {
     let response = await API.post(request, data);
-    console.log(response)
     if (response.status === 200) {
       createSession(response.data.token);
-      localStorage.setItem("USER_DATA", JSON.stringify(response.data))
-      return true;
+      return response.data;
     }
     if (response.status === 401) {
       throw new Error("Email ou senha inválida!");
@@ -22,7 +20,7 @@ export const loginUser = async (email: string, password: string) => {
     }
     throw new Error();
   } catch (error) {
-    return false;
+    return { isError: true, error };
   }
 };
 

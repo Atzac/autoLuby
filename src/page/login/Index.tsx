@@ -1,24 +1,42 @@
-import { FC, useState } from "react";
+import { FC, useState, useContext } from "react";
 
 import carImage from "@assets/car.png";
 import logoIcon from "@assets/autoLub.svg";
 import { CarImageBG, LoginContainer, Divider } from "./styles";
 import { Input, Checkbox, LogoInitial, Button } from "@components/index";
 import { loginUser } from "@api/loginUser";
+import { InitialValues, Validation } from "./validation";
 
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "@store/index";
+
+import { useFormik } from "formik";
 
 const Login: FC = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const { setUserData } = useContext(AuthContext);
+  const [inputError, setInputError] = useState(false);
 
-  const handleSubmit = async () => {
-    const response = await loginUser(email, password);
-    if (response) {
-      navigate("/");
-    }
-  };
+  const formik = useFormik({
+    initialValues: InitialValues,
+    validationSchema: Validation,
+    onSubmit: async (values) => {
+      const response = await loginUser(values.email, values.password);
+      console.log(response);
+      if (response.token) {
+        setUserData(response);
+        navigate("/");
+      }
+      if (
+        response.isError &&
+        response.error.message === "Email ou senha inválida!"
+      ) {
+        setInputError(true);
+      }
+      console.log(values);
+    },
+  });
+  console.log(formik.errors)
 
   return (
     <>
@@ -31,15 +49,19 @@ const Login: FC = () => {
 
           <Input
             label="Endereço de email"
+            type="email"
             placeholder={"@mail.com"}
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            onChange={formik.handleChange("email")}
+            error={formik.errors.email && formik.touched.email ? true : false}
+            value={formik.values.email}
           />
           <Input
             label="Senha"
+            type="password"
             placeholder={"senha"}
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
+            onChange={formik.handleChange("password")}
+            error={formik.errors.password && formik.touched.email ? true : false}
+            value={formik.values.password}
           />
 
           <section>
@@ -47,7 +69,7 @@ const Login: FC = () => {
             <p>Esqueceu a senha?</p>
           </section>
 
-          <Button buttonStyle="primary" onClick={handleSubmit}>
+          <Button buttonStyle="primary" onClick={formik.handleSubmit}>
             Entrar
           </Button>
           <p>

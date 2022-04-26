@@ -9,23 +9,11 @@ const API = axios.create({
   },
 });
 
-export const createSession = async (email: string, password: string) => {
-  return axios
-    .post("https://autoluby.k8s.luby.me/login", { email, password })
-    .then(function (response) {
-      console.log(response);
-      return response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
-
 API.interceptors.request.use((config) => {
   const sessionObject = getSession();
   if (sessionObject) {
     config.headers = {
-      Authorization: `${sessionObject.type} ${sessionObject.token}`,
+      Authorization: `Bearer ${sessionObject}`,
     };
   }
 

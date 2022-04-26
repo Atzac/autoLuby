@@ -7,15 +7,17 @@ import AutoLubyLogo from "@assets/autoLub.svg";
 import { useNavigate } from "react-router-dom";
 import { logOut } from "@api/loginUser";
 
-const NavBar: FC = () => {
+type propTypes = {
+  noSearch?: boolean;
+};
+
+const NavBar: FC<propTypes> = ({ noSearch }) => {
   const navigate = useNavigate();
   return (
     <Bar>
-      <Logo onClick={() => navigate("/")} urlImage={AutoLubyLogo}>
-        {/* <img src={Logo} alt="logo" /> */}
-      </Logo>
+      <Logo onClick={() => navigate("/")} urlImage={AutoLubyLogo} />
 
-      <InputSearch />
+      {!noSearch && <InputSearch />}
 
       <Button buttonStyle="exit" onClick={logOut}>
         Sair

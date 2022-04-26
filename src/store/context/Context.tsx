@@ -1,16 +1,29 @@
-import { createContext, useState, FC, ReactNode } from "react";
+import { createContext, useState, FC, ReactNode, useEffect } from "react";
 
 type propTypes = {
   children: ReactNode;
 };
 
 export const AuthContext = createContext<any>(null);
+const converte = () => {
+  const local = localStorage.getItem("USER_DATA");
+  if (local) {
+    return JSON.parse(local);
+  }
+  return null;
+};
 
 const Provider: FC<propTypes> = (props) => {
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<any>(converte());
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    localStorage.setItem("USER_DATA", JSON.stringify(userData));
+    setLoading(false);
+  }, [userData]);
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData }}>
+    <AuthContext.Provider value={{ userData, setUserData, loading }}>
       {props.children}
     </AuthContext.Provider>
   );

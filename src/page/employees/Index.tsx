@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Table } from "@components/index";
-import { Td } from "@globalStyle/index";
+import { ListEmployees } from "@api/listEmployees";
+import { inReal } from "@helpers/convertValue";
 
 const datas = [
   {
@@ -11,33 +12,45 @@ const datas = [
     valor: "R$ 6.000,00",
     bio: "Magna veniam ex labore incididunt. Nostrud irure minim deserunt nulla id enim ipsum do veniam ex labore incididunt.",
   },
-  
 ];
 
+type employeeType = {
+  name: string;
+  email: string;
+  cpf: string;
+  salary: number;
+  bio: string;
+};
+
 const Employees = () => {
-  const [data, setData] = useState<any>(datas);
+  useEffect(() => {
+    const test = async () => {
+      const response = await ListEmployees();
+      if (response) {
+        console.log(response);
+        setData(response.employees);
+      }
+    };
+    test();
+  }, []);
+
+  const [data, setData] = useState<employeeType[]>([]);
   return (
     <>
-      <Container title="Funcionários">
+      <Container title="Funcionários" noSearch>
         <Table
           tableTitle="Listagem de funcionários da empresa"
-          headers={[
-            "Nome",
-            "Email",
-            "CPF",
-            "Valor",
-            "Bio"
-          ]}
+          headers={["Nome", "Email", "CPF", "Valor", "Bio"]}
         >
           {data &&
-            data.map((car: any) => {
+            data.map((emp: employeeType) => {
               return (
-                <tr key={car.id}>
-                  <td>{car.nome}</td>
-                  <td>{car.email}</td>
-                  <td className="minWidth">{car.cpf}</td>
-                  <td className="minWidth">{car.valor}</td>
-                  <td>{car.bio}</td>
+                <tr key={emp.cpf}>
+                  <td>{emp.name}</td>
+                  <td>{emp.email}</td>
+                  <td className="minWidth">{emp.cpf}</td>
+                  <td className="minWidth">{inReal(emp.salary)}</td>
+                  <td>{emp.bio}</td>
                 </tr>
               );
             })}

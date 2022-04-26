@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { theme } from "@globalStyle/index";
 
+type propTypes = {
+  error?: boolean;
+}
+
 export const DivInput = styled.div`
   margin-bottom: 10px;
   input {
@@ -8,7 +12,7 @@ export const DivInput = styled.div`
     height: 35px;
     padding-left: 15px;
     border-radius: 3px;
-    border: 1px solid ${theme.inputStroke};
+    border: 1px solid ${(props: propTypes) => props.error ? "red" : theme.inputStroke};
     background-color: ${theme.inputBackground};
     font-size: 13px;
     margin-top: 5px;

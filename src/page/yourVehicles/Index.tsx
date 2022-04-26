@@ -1,146 +1,26 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { Container, Table } from "@components/index";
 import { Td } from "@globalStyle/index";
+import { AuthContext } from "@store/index";
+import { inReal } from "@helpers/convertValue"
 
-const datas = [
-  {
-    id: 1,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Vendido",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 2,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Disponível",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 3,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Reservado",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 4,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Reservado",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 5,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Reservado",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 6,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Reservado",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 12,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Vendido",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 22,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Disponível",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 32,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Reservado",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 42,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Reservado",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 52,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Reservado",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-  {
-    id: 62,
-    marca: "Ford",
-    modelo: "Fiesta",
-    ano: "2017",
-    km: "70.000",
-    cor: "Branco",
-    status: "Reservado",
-    chassi: "9BW",
-    valor: "R$ 39.000,00",
-  },
-];
+type carTypes = {
+  brand: string;
+  chassi: string;
+  color: string;
+  km: number;
+  model: string;
+  status: string;
+  value: number;
+  yer: string;
+};
+
 const YourVehicles = () => {
-  const [data, setData] = useState<any>(datas);
+  const { userData } = useContext(AuthContext);
+
   return (
     <>
-      <Container title="Seus Veículos">
+      <Container title="Seus Veículos" noSearch>
         <Table
           tableTitle="Listagem de veículos reservados e vendidos"
           headers={[
@@ -154,20 +34,20 @@ const YourVehicles = () => {
             "Valor",
           ]}
         >
-          {data &&
-            data.map((car: any) => {
+          {userData &&
+            userData.user.vehicles.map((car: carTypes) => {
               return (
-                <tr key={car.id}>
-                  <td>{car.marca}</td>
-                  <td>{car.modelo}</td>
-                  <td>{car.ano}</td>
+                <tr key={car.chassi}>
+                  <td>{car.brand}</td>
+                  <td>{car.model}</td>
+                  <td>{car.yer}</td>
                   <td>{car.km}</td>
-                  <td>{car.cor}</td>
+                  <td>{car.color}</td>
                   <Td status={car.status}>
                     <div>{car.status}</div>
                   </Td>
                   <td>{car.chassi}</td>
-                  <td>{car.valor}</td>
+                  <td>{inReal(car.value)}</td>
                 </tr>
               );
             })}
@@ -175,6 +55,6 @@ const YourVehicles = () => {
       </Container>
     </>
   );
-}
+};
 
 export default YourVehicles;

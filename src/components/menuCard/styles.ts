@@ -33,7 +33,7 @@ export const Card = styled.form`
       color: ${theme.gray};
     }
     div {
-      width: 85px;
+      width: auto;
       display: flex;
       position: absolute;
       bottom: 10px;

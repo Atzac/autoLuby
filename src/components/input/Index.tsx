@@ -3,25 +3,20 @@ import { DivInput } from "./styles";
 
 type propTypes = {
   name?: string;
+  type: string;
   label?: string;
   value?: string;
   placeholder?: string;
+  error?: boolean;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: () => void;
 };
 
-const Input: FC<propTypes> = ({
-  label,
-  onChange,
-  placeholder,
-  value,
-  onBlur,
-}) => {
+const Input: FC<propTypes> = ({ label, onChange, placeholder, value, type, error }) => {
   return (
-    <DivInput>
+    <DivInput error={error}>
       <label>{label && label}</label>
       <input
-        type="email"
+        type={type}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
