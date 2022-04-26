@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Container, Table } from "@components/index";
 import { Td } from "@globalStyle/index";
 import { ListAllVehicles } from "@api/listAllVehicles";
@@ -28,6 +28,13 @@ const AllVehicles = () => {
     getVehicles();
   }, []);
 
+  const filter = useCallback(async (search: string) => {
+    let response = await ListAllVehicles(search);
+    if (response.vehicles) {
+      setData(response.vehicles);
+    }
+  }, []);
+
   return (
     <>
       <Container title="Todos Veículos" noSearch>
@@ -43,6 +50,7 @@ const AllVehicles = () => {
             "Chassi",
             "Valor",
           ]}
+          handleSearch={filter}
         >
           {data &&
             data.map((car: carTypes) => {

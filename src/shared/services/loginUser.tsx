@@ -1,5 +1,6 @@
 import { API } from "./api";
 import { createSession, destroySession } from "../helpers/localStorage";
+import { toast } from "react-toastify";
 
 export const loginUser = async (email: string, password: string) => {
   const request = `login`;
@@ -11,9 +12,12 @@ export const loginUser = async (email: string, password: string) => {
       return response.data;
     }
     if (response.status === 401) {
+      toast.warning("Verifique seu login");
       throw new Error("Email ou senha inválida!");
     }
     if (response.status === 404) {
+      toast.error("Servidor indisponível");
+
       throw new Error(
         "Não foi possivel realizar login, servidor indisponível."
       );
@@ -24,6 +28,6 @@ export const loginUser = async (email: string, password: string) => {
   }
 };
 
-export const logOut = () => {
+export const logOut = async () => {
   destroySession();
 };

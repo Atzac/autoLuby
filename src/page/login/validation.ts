@@ -6,9 +6,6 @@ export const InitialValues = {
 };
 
 export const Validation = yup.object({
-  email: yup
-    .string()
-    .email("E-mail inválido")
-    .required("Email é Obrigatório!"),
-  password: yup.string().required("Insira a senha"),
+  email: yup.string().email("E-mail inválido").required("Email é Obrigatório!"),
+  password: yup.string().required("Insira a senha").min(5, "Min 5 caractéres"),
 });

@@ -1,11 +1,12 @@
 import { FC, ReactNode } from "react";
-import { TableStyle, TableContainer, Td } from "./styles";
+import { TableStyle, TableContainer } from "./styles";
 import { InputSearch } from "@components/index";
 
 type propTypes = {
   children?: ReactNode;
   tableTitle: string;
   headers: string[];
+  handleSearch?: (search: string) => Promise<void>;
 };
 
 const Table: FC<propTypes> = (props) => {
@@ -14,7 +15,7 @@ const Table: FC<propTypes> = (props) => {
       <TableContainer>
         <section>
           <h1>{props.tableTitle}</h1>
-          <InputSearch size="200" />
+          <InputSearch size="200" handleSearch={props.handleSearch} />
         </section>
 
         <TableStyle>

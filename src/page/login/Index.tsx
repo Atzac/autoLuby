@@ -1,4 +1,4 @@
-import { FC, useState, useContext } from "react";
+import { FC, useContext } from "react";
 
 import carImage from "@assets/car.png";
 import logoIcon from "@assets/autoLub.svg";
@@ -15,29 +15,21 @@ import { useFormik } from "formik";
 const Login: FC = () => {
   const navigate = useNavigate();
   const { setUserData } = useContext(AuthContext);
-  const [inputError, setInputError] = useState(false);
 
   const formik = useFormik({
     initialValues: InitialValues,
     validationSchema: Validation,
     onSubmit: async (values) => {
       const response = await loginUser(values.email, values.password);
-      console.log(response);
       if (response.token) {
         setUserData(response);
         navigate("/");
+      } else {
+        formik.setFieldError("email", "Email ou senha incorretos");
+        formik.setFieldError("password", "Email ou senha incorretos");
       }
-      if (
-        response.isError &&
-        response.error.message === "Email ou senha inválida!"
-      ) {
-        setInputError(true);
-      }
-      console.log(values);
     },
   });
-  console.log(formik.errors)
-
   return (
     <>
       <Divider>
@@ -46,22 +38,29 @@ const Login: FC = () => {
             <h1>Bem-vindo à AutoLuby</h1>
             <p>Faça o login para acessar sua conta</p>
           </div>
-
           <Input
             label="Endereço de email"
             type="email"
-            placeholder={"@mail.com"}
+            placeholder={
+              formik.errors.email ? formik.errors.email : "@mail.com"
+            }
             onChange={formik.handleChange("email")}
+            onBlur={formik.handleBlur("email")}
             error={formik.errors.email && formik.touched.email ? true : false}
             value={formik.values.email}
+            valid={!formik.errors.email && formik.values.email.length > 0}
           />
           <Input
             label="Senha"
             type="password"
-            placeholder={"senha"}
+            placeholder={formik.errors.password ? "Senha incorreta" : "senha"}
             onChange={formik.handleChange("password")}
-            error={formik.errors.password && formik.touched.email ? true : false}
+            onBlur={formik.handleBlur("password")}
+            error={
+              formik.errors.password && formik.touched.password ? true : false
+            }
             value={formik.values.password}
+            valid={!formik.errors.password && formik.values.password.length > 0}
           />
 
           <section>

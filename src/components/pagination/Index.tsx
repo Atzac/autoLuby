@@ -6,7 +6,7 @@ type propTypes = {};
 const Pagination: FC<propTypes> = () => {
   return (
     <PaginationStyles>
-      <button type="button">Click Me!</button>
+      <button type="button">Click</button>
       <div>
         <a href="www.google.com">1</a>
         <a href="www.google.com">2</a>
@@ -16,7 +16,7 @@ const Pagination: FC<propTypes> = () => {
         <a href="www.google.com">6</a>
         <a href="www.google.com">&raquo;</a>
       </div>
-      <button type="button">Click Me!</button>
+      <button type="button">Click</button>
     </PaginationStyles>
   );
 };

@@ -3,17 +3,6 @@ import { Container, Table } from "@components/index";
 import { ListEmployees } from "@api/listEmployees";
 import { inReal } from "@helpers/convertValue";
 
-const datas = [
-  {
-    id: 1,
-    nome: "Tiago",
-    email: "thiago.m@mail.com",
-    cpf: "114.578.065-78",
-    valor: "R$ 6.000,00",
-    bio: "Magna veniam ex labore incididunt. Nostrud irure minim deserunt nulla id enim ipsum do veniam ex labore incididunt.",
-  },
-];
-
 type employeeType = {
   name: string;
   email: string;
@@ -27,7 +16,6 @@ const Employees = () => {
     const test = async () => {
       const response = await ListEmployees();
       if (response) {
-        console.log(response);
         setData(response.employees);
       }
     };

@@ -6,10 +6,8 @@ import carImage2 from "@assets/car2.png";
 import employee from "@assets/employee.png";
 import { AuthContext } from "@store/index";
 
-
 function Home() {
   const { userData } = useContext(AuthContext);
-  console.log(userData)
   return (
     <>
       <NavBar />

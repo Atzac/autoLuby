@@ -15,6 +15,7 @@ const converte = () => {
 
 const Provider: FC<propTypes> = (props) => {
   const [userData, setUserData] = useState<any>(converte());
+  const [filter, setFilter] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ const Provider: FC<propTypes> = (props) => {
   }, [userData]);
 
   return (
-    <AuthContext.Provider value={{ userData, setUserData, loading }}>
+    <AuthContext.Provider value={{ userData, setUserData, loading, filter, setFilter }}>
       {props.children}
     </AuthContext.Provider>
   );
